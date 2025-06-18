@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application vs Subject-Oriented Data</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            opacity: 0.9;
+            font-size: 1.2em;
+        }
+
+        .main-content {
+            display: flex;
+            min-height: 800px;
+        }
+
+        .left-side, .right-side {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .left-side {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            border-right: 3px solid #e0e0e0;
+        }
+
+        .right-side {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .application-box, .subject-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid;
+        }
+
+        .application-box {
+            border-left-color: #e74c3c;
+        }
+
+        .subject-box {
+            border-left-color: #27ae60;
+        }
+
+        .application-box:hover, .subject-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .app-title, .subject-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .app-data, .subject-sources {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .data-points {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border-left: 3px solid #3498db;
+        }
+
+        .integration-arrow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .arrow {
+            width: 60px;
+            height: 4px;
+            background: #2c3e50;
+            position: relative;
+            margin: 0 10px;
+        }
+
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 16px solid #2c3e50;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+        }
+
+        .integration-text {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            white-space: nowrap;
+        }
+
+        .benefits {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .benefits h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .benefit-item {
+            background: #e8f6f3;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            font-size: 0.95em;
+        }
+
+        .silo-indicator {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 10px;
+            border: 2px dashed #e74c3c;
+        }
+
+        .silo-text {
+            color: #c0392b;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-side {
+                border-right: none;
+                border-bottom: 3px solid #e0e0e0;
+            }
+            
+            .integration-arrow {
+                transform: rotate(90deg);
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Data Organization Paradigms</h1>
+            <div class="subtitle">Application-Oriented vs Subject-Oriented Data</div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-side">
+                <div class="section-title">📱 Application-Oriented Data Sets</div>
+                <div class="subtitle" style="text-align: center; margin-bottom: 30px; color: #2c3e50; font-style: italic;">Organized by Individual Systems</div>
+
+                <div class="application-box">
+                    <div class="app-title">🛒 Shopping Cart Application</div>
+                    <div class="data-points">
+                        <strong>Data:</strong> Product inventory, pricing, cart sessions, temporary storage
+                    </div>
+                    <div class="app-data">
+                        <strong>Function:</strong> Add/remove items, calculate totals, maintain state<br>
+                        <strong>Why Separate:</strong> Needs rapid read/write access and real-time calculations
+                    </div>
+                </div>
+
+                <div class="application-box">
+                    <div class="app-title">📦 Order Management System</div>
+                    <div class="data-points">
+                        <strong>Data:</strong> Order status, shipping info, payment processing, fulfillment tracking
+                    </div>
+                    <div class="app-data">
+                        <strong>Function:</strong> Process orders from cart to delivery<br>
+                        <strong>Why Separate:</strong> Complex state management, payment gateway integration
+                    </div>
+                </div>
+
+                <div class="application-box">
+                    <div class="app-title">📊 Web Analytics Dashboard</div>
+                    <div class="data-points">
+                        <strong>Data:</strong> Page views, user sessions, conversion funnels, traffic sources
+                    </div>
+                    <div class="app-data">
+                        <strong>Function:</strong> Track user behavior, generate reports<br>
+                        <strong>Why Separate:</strong> Optimized for aggregations and time-series data
+                    </div>
+                </div>
+
+                <div class="application-box">
+                    <div class="app-title">🔍 Product Search Engine</div>
+                    <div class="data-points">
+                        <strong>Data:</strong> Searchable attributes, search indexes, query logs, relevance scoring
+                    </div>
+                    <div class="app-data">
+                        <strong>Function:</strong> Enable fast product discovery<br>
+                        <strong>Why Separate:</strong> Specialized indexing and full-text search capabilities
+                    </div>
+                </div>
+
+                <div class="silo-indicator">
+                    <div class="silo-text">⚠️ Creates Data Silos</div>
+                    <div style="font-size: 0.9em; color: #666; margin-top: 8px;">Each application optimized independently</div>
+                </div>
+            </div>
+
+            <div class="integration-arrow">
+                <div class="arrow"></div>
+                <div class="integration-text">DATA WAREHOUSE INTEGRATION</div>
+                <div class="arrow"></div>
+            </div>
+
+            <div class="right-side">
+                <div class="section-title">🎯 Subject-Oriented Data Warehouse</div>
+                <div class="subtitle" style="text-align: center; margin-bottom: 30px; color: #2c3e50; font-style: italic;">Organized by Business Subjects</div>
+
+                <div class="subject-box">
+                    <div class="subject-title">👥 Customer Subject Area</div>
+                    <div class="subject-sources">
+                        <strong>Integrated from:</strong> Cart browsing + Purchase history + Journey patterns + Search behavior
+                    </div>
+                    <div class="data-points">
+                        <strong>Business View:</strong> Complete customer profiles, lifetime value, segmentation, cross-channel experience
+                    </div>
+                </div>
+
+                <div class="subject-box">
+                    <div class="subject-title">📦 Product Subject Area</div>
+                    <div class="subject-sources">
+                        <strong>Integrated from:</strong> Inventory levels + Sales volume + Page performance + Search popularity
+                    </div>
+                    <div class="data-points">
+                        <strong>Business View:</strong> Product performance metrics, profitability analysis, lifecycle management
+                    </div>
+                </div>
+
+                <div class="subject-box">
+                    <div class="subject-title">💰 Sales Subject Area</div>
+                    <div class="subject-sources">
+                        <strong>Integrated from:</strong> Cart values + Transactions + Conversion funnels + Search-to-sale rates
+                    </div>
+                    <div class="data-points">
+                        <strong>Business View:</strong> Sales performance analysis, revenue forecasting, campaign effectiveness
+                    </div>
+                </div>
+
+                <div class="subject-box">
+                    <div class="subject-title">📋 Inventory Subject Area</div>
+                    <div class="subject-sources">
+                        <strong>Integrated from:</strong> Stock levels + Fulfillment rates + View ratios + Demand indicators
+                    </div>
+                    <div class="data-points">
+                        <strong>Business View:</strong> Turnover analysis, demand forecasting, supply chain optimization
+                    </div>
+                </div>
+
+                <div class="benefits">
+                    <h3>🚀 Integration Benefits</h3>
+                    <div class="benefit-item">
+                        <strong>Single Source of Truth:</strong> One authoritative view across all systems
+                    </div>
+                    <div class="benefit-item">
+                        <strong>Cross-Functional Analysis:</strong> Analyze relationships spanning multiple systems
+                    </div>
+                    <div class="benefit-item">
+                        <strong>Historical Perspective:</strong> Time-variant data for trend analysis
+                    </div>
+                    <div class="benefit-item">
+                        <strong>Consistent Metrics:</strong> Same definitions across all departments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
