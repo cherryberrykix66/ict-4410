@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Warehouse Financial Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .chart-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .chart-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 8px;
+        }
+        
+        .financial-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .benefits-breakdown {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .benefits-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+        
+        .benefit-name {
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .benefit-value {
+            font-weight: bold;
+            color: #28a745;
+            font-size: 18px;
+        }
+        
+        .implementation-timeline {
+            background: linear-gradient(135deg, #6f42c1, #5a2d91);
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .timeline-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .timeline-phases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .phase {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .phase-number {
+            background: white;
+            color: #6f42c1;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+        
+        .phase-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .phase-details {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .roi-highlight {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .roi-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .roi-subtext {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Financial Analysis & ROI Projection</div>
+        
+        <div class="financial-summary">
+            <div class="metric-card">
+                <span class="metric-value">$2.8M</span>
+                <span class="metric-label">Total Investment</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">$4.2M</span>
+                <span class="metric-label">Annual Benefits</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">20</span>
+                <span class="metric-label">Months Payback</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">150%</span>
+                <span class="metric-label">Annual ROI</span>
+            </div>
+            <div class="metric-card">
+                <span class="metric-value">$6.8M</span>
+                <span class="metric-label">3-Year NPV</span>
+            </div>
+        </div>
+        
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-title">Investment vs. Benefits Timeline</div>
+                <canvas id="roiChart" width="400" height="300"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Annual Benefits Breakdown</div>
+                <canvas id="benefitsChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+        
+        <div class="benefits-breakdown">
+            <div class="benefits-title">Detailed Benefits Analysis</div>
+            <div class="benefit-item">
+                <span class="benefit-name">Operational Efficiency Gains</span>
+                <span class="benefit-value">$1,800,000</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-name">Improved Underwriting Decisions</span>
+                <span class="benefit-value">$1,200,000</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-name">Enhanced Customer Retention</span>
+                <span class="benefit-value">$550,000</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-name">Reduced Compliance Costs</span>
+                <span class="benefit-value">$450,000</span>
+            </div>
+            <div class="benefit-item">
+                <span class="benefit-name">Fraud Detection Improvements</span>
+                <span class="benefit-value">$200,000</span>
+            </div>
+        </div>
+        
+        <div class="implementation-timeline">
+            <div class="timeline-title">Implementation Phases & Investment</div>
+            <div class="timeline-phases">
+                <div class="phase">
+                    <div class="phase-number">1</div>
+                    <div class="phase-title">Underwriting Data Mart</div>
+                    <div class="phase-details">Months 1-6<br>$1.2M Investment<br>Risk Assessment & Pricing</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-number">2</div>
+                    <div class="phase-title">Claims Data Mart</div>
+                    <div class="phase-details">Months 7-12<br>$850K Investment<br>Loss Analysis & Fraud Detection</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-number">3</div>
+                    <div class="phase-title">Customer Analytics</div>
+                    <div class="phase-details">Months 13-18<br>$750K Investment<br>Retention & Cross-sell</div>
+                </div>
+                <div class="phase">
+                    <div class="phase-number">4</div>
+                    <div class="phase-title">Enterprise Integration</div>
+                    <div class="phase-details">Months 19-24<br>$400K Investment<br>Executive Reporting</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="roi-highlight">
+            <div class="roi-text">Break-Even Achieved in Month 20</div>
+            <div class="roi-subtext">Every month after payback generates $350K in net benefits</div>
+        </div>
+    </div>
+
+    <script>
+        // ROI Timeline Chart
+        const roiCtx = document.getElementById('roiChart').getContext('2d');
+        new Chart(roiCtx, {
+            type: 'line',
+            data: {
+                labels: ['Year 0', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                datasets: [{
+                    label: 'Cumulative Investment',
+                    data: [0, -2050, -2800, -2800, -2800, -2800],
+                    borderColor: '#dc3545',
+                    backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Cumulative Benefits',
+                    data: [0, 0, 1400, 5600, 9800, 14000],
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Net ROI',
+                    data: [0, -2050, -1400, 2800, 7000, 11200],
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + (value/1000) + 'K';
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Benefits Breakdown Chart
+        const benefitsCtx = document.getElementById('benefitsChart').getContext('2d');
+        new Chart(benefitsCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    'Operational Efficiency',
+                    'Underwriting Improvements',
+                    'Customer Retention',
+                    'Compliance Savings',
+                    'Fraud Detection'
+                ],
+                datasets: [{
+                    data: [1800, 1200, 550, 450, 200],
+                    backgroundColor: [
+                        '#007bff',
+                        '#28a745',
+                        '#ffc107',
+                        '#17a2b8',
+                        '#6f42c1'
+                    ],
+                    borderWidth: 3,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ': $' + context.parsed.toLocaleString() + 'K';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
