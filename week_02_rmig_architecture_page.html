@@ -405,16 +405,31 @@
             margin-top: 30px;
             padding: 20px;
             background: linear-gradient(135deg, #663399, #9966cc);
-            border-radius: 10px;
+            border-radius: 16px;
             text-align: center;
+            color: white;
             /* border: 3px solid #102e82; */
         }
         
         .benefits-title {
-            color: #ffffff;
-            font-size: 18px;
+            color: white;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
+        }
+
+        .benefits-grid {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
         }
         
         .benefits-list {
@@ -427,7 +442,7 @@
             color: #f6d047;
             font-weight: bold;
             margin-top: 10px;
-            font-size: 24px;
+            font-size: 26px;
         }
         
         
@@ -615,10 +630,12 @@
         <div class="benefits-section">
             <div class="benefits-title">Key Benefits for Rocky Mountain Insurance Group</div>
             <div class="benefits-list">
-                <span class="benefits-check">✓</span> Unified view across all insurance functions &nbsp;&nbsp;
-                <span class="benefits-check">✓</span> Real-time decision support for Colorado market &nbsp;&nbsp;
-                <span class="benefits-check">✓</span> Regulatory compliance automation &nbsp;&nbsp;
-                <span class="benefits-check">✓</span> Scalable cloud-native architecture
+            <div class="benefits-grid">
+                <div class="benefit-item"><span class="benefits-check">✓</span> Unified view across all insurance functions</div>
+               <div class="benefit-item"><span class="benefits-check">✓</span> Real-time decision support for Colorado market</div>
+                <div class="benefit-item"><span class="benefits-check">✓</span> Regulatory compliance <br />automation</div>
+                <div class="benefit-item"><span class="benefits-check">✓</span> Scalable cloud-native <br />architecture</div>
+            </div>
             </div>
         </div>
     </div>
