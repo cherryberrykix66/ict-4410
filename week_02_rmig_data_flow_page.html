@@ -13,9 +13,10 @@
             min-height: 100vh;
         }
         
+        /**************************************** start navbar styles */
         .navbar {
             background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            padding: 20px 30px;
+            padding: 0px 30px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
@@ -109,15 +110,17 @@
             .hamburger {
                 display: flex;
             }
-            
+            .nav-item {
+            margin-top:30px;
+            }
             .navbar-nav {
                 display: none;
                 width: 100%;
                 flex-direction: column;
                 gap: 0;
-                margin-top: 20px;
+                margin-top: 0px;
                 background: rgba(45, 90, 39, 0.95);
-                border-radius: 10px;
+                /* border-radius: 10px; */
                 padding: 20px;
                 position: absolute;
                 top: 100%;
@@ -131,10 +134,9 @@
             }
             
             .nav-link {
-                padding: 15px 20px;
                 border-radius: 8px;
-                margin-bottom: 5px;
                 text-align: center;
+                margin-top: 100px;
             }
             
             .nav-link:hover {
@@ -152,6 +154,7 @@
                 padding: 12px 15px;
             }
         }
+        /**************************************** end navbar styles */
         
         .main-content {
             padding: 20px;
@@ -507,27 +510,27 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-logo">
-            <svg width="450" height="225" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+            <svg width="500" height="225" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
                 <!-- Background circle -->
-                <circle cx="60" cy="60" r="45" fill="#bf2c34" stroke="#f6d047" stroke-width="3"/>
+                <circle cx="60" cy="60" r="45" fill="#87ceeb" stroke="#ffffff" stroke-width="3"/>
                 
                 <!-- Mountain silhouette -->
                 <g transform="translate(60, 60)">
                     <!-- Back mountain -->
-                    <path d="M-32 13 L-18 -22 L-4 -13 L9 -27 L23 -18 L32 13 Z" fill="#f6d047" opacity="0.8"/>
+                    <path d="M-32 13 L-18 -22 L-4 -13 L9 -27 L23 -18 L32 13 Z" fill="#9966cc" opacity="0.8"/>
                     <!-- Front mountain -->
-                    <path d="M-27 13 L-13 -18 L0 -9 L13 -22 L27 13 Z" fill="#f6d047"/>
+                    <path d="M-27 13 L-13 -18 L0 -9 L13 -22 L27 13 Z" fill="#663399"/>
                     <!-- Snow caps -->
                     <path d="M-18 -22 L-13 -18 L-8 -20 L-4 -13" fill="#ffffff" opacity="0.9"/>
                     <path d="M9 -27 L13 -22 L18 -24 L23 -18" fill="#ffffff" opacity="0.9"/>
                 </g>
                 
                 <!-- RMIG text -->
-                <text x="125" y="45" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="white">RMIG</text>
-                <text x="125" y="62" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#f6d047">ROCKY MOUNTAIN</text>
-                <text x="125" y="75" font-family="Arial, sans-serif" font-size="10" font-weight="600" fill="#f6d047">INSURANCE GROUP</text>
-                <line x1="125" y1="80" x2="270" y2="80" stroke="#f6d047" stroke-width="2"/>
-                <text x="125" y="92" font-family="Arial, sans-serif" font-size="8" font-style="italic" fill="#f6d047">Protecting Colorado's Future</text>
+                <text x="125" y="45" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white">RMIG</text>
+                <text x="125" y="64" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">ROCKY MOUNTAIN</text>
+                <text x="125" y="80" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">INSURANCE GROUP</text>
+                <line x1="125" y1="86" x2="270" y2="86" stroke="#f6d047" stroke-width="1"/>
+                <text x="125" y="100" font-family="Arial, sans-serif" font-size="12" font-style="italic" fill="#f6d047">Protecting Colorado's Future</text>
             </svg>
         </div>
         
@@ -540,16 +543,16 @@
         
         <ul class="navbar-nav" id="navMenu">
             <li class="nav-item">
-                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_architecture_page.html" class="nav-link">Architecture</a>
             </li>
             <li class="nav-item">
-                <a href="#roi-analysis" class="nav-link">ROI Analysis</a>
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_roi_page.html" class="nav-link active">ROI Analysis</a>
             </li>
             <li class="nav-item">
-                <a href="#data-flow" class="nav-link active">Data Flow</a>
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_data_flow_page.html" class="nav-link">Data Flow</a>
             </li>
             <li class="nav-item">
-                <a href="#metadata" class="nav-link">Metadata</a>
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_metadata_page.html" class="nav-link">Metadata</a>
             </li>
             <li class="nav-item">
                 <a href="#resources" class="nav-link">Resources</a>
