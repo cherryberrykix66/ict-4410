@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocky Mountain Insurance Group - References</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #87ceeb, #4a90e2);
+            min-height: 100vh;
+        }
+        
+        /**************************************** start navbar styles */
+        .navbar {
+            background: linear-gradient(135deg, #2d5a27, #4a7c59);
+            padding: 0px 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            min-height: 80px;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: rgba(246, 208, 71, 0.2);
+            border-color: #f6d047;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .nav-link.active {
+            background: #f6d047;
+            color: #102e82;
+            font-weight: 700;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                min-height: 70px;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-item {
+                margin-top: 30px;
+            }
+            
+            .navbar-nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 0px;
+                background: rgba(45, 90, 39, 0.95);
+                padding: 20px;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+            
+            .navbar-nav.active {
+                display: flex;
+            }
+            
+            .nav-link {
+                border-radius: 8px;
+                text-align: center;
+                margin-top: 100px;
+            }
+            
+            .nav-link:hover {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+        }
+        /**************************************** end navbar styles */
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #102e82;
+        }
+        
+        .title {
+            color: #102e82;
+            font-size: 38px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #bf2c34;
+            margin: 10px 0 0 0;
+            font-style: italic;
+            font-size: 24px;
+        }
+        
+        .company-tagline {
+            color: #102e82;
+            font-size: 20px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+        
+        .references-section {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .references-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #102e82;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .reference-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .reference-item {
+            background: white;
+            margin: 20px 0;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border-left: 5px solid #102e82;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+            font-size: 16px;
+            color: #495057;
+        }
+        
+        .reference-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-left-color: #bf2c34;
+        }
+        
+        .reference-item a {
+            color: #102e82;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .reference-item a:hover {
+            color: #bf2c34;
+            text-decoration: underline;
+        }
+        
+        .book-title {
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        .chapter-title {
+            font-weight: 600;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: #102e82;
+        }
+        
+        .publication-info {
+            color: #6c757d;
+            font-size: 15px;
+        }
+        
+        .citation-note {
+            background: linear-gradient(135deg, #663399, #9966cc);
+            color: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .citation-note-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .citation-note-text {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .methodology-section {
+            background: linear-gradient(135deg, #f6d047, #fff);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 3px solid #102e82;
+        }
+        
+        .methodology-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #102e82;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .methodology-text {
+            color: #495057;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        .source-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-left: 5px solid #2d5a27;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d5a27;
+            margin-bottom: 10px;
+        }
+        
+        .category-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: #102e82;
+            margin-bottom: 5px;
+        }
+        
+        .category-description {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 28px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .company-tagline {
+                font-size: 16px;
+            }
+            
+            .reference-item {
+                padding: 20px;
+                font-size: 15px;
+            }
+            
+            .source-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <svg width="500" height="225" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background circle -->
+                <circle cx="60" cy="60" r="45" fill="#87ceeb" stroke="#ffffff" stroke-width="3"/>
+                
+                <!-- Mountain silhouette -->
+                <g transform="translate(60, 60)">
+                    <!-- Back mountain -->
+                    <path d="M-32 13 L-18 -22 L-4 -13 L9 -27 L23 -18 L32 13 Z" fill="#9966cc" opacity="0.8"/>
+                    <!-- Front mountain -->
+                    <path d="M-27 13 L-13 -18 L0 -9 L13 -22 L27 13 Z" fill="#663399"/>
+                    <!-- Snow caps -->
+                    <path d="M-18 -22 L-13 -18 L-8 -20 L-4 -13" fill="#ffffff" opacity="0.9"/>
+                    <path d="M9 -27 L13 -22 L18 -24 L23 -18" fill="#ffffff" opacity="0.9"/>
+                </g>
+                
+                <!-- RMIG text -->
+                <text x="125" y="45" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white">RMIG</text>
+                <text x="125" y="64" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">ROCKY MOUNTAIN</text>
+                <text x="125" y="80" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">INSURANCE GROUP</text>
+                <line x1="125" y1="86" x2="290" y2="86" stroke="#f6d047" stroke-width="1"/>
+                <text x="125" y="100" font-family="Arial, sans-serif" font-size="12" font-style="italic" fill="#f6d047">Protecting Colorado's Future</text>
+            </svg>
+        </div>
+        
+        <!-- Hamburger Menu for Mobile -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <ul class="navbar-nav" id="navMenu">
+            <li class="nav-item">
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_architecture_page.html" class="nav-link">Architecture</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_roi_page.html" class="nav-link">ROI Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_data_flow_page.html" class="nav-link">Data Flow</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://cherryberrykix66.github.io/ict-4410/week_02_rmig_metadata_page.html" class="nav-link">Metadata</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">References</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="title-section">
+                <div class="title">References & Bibliography</div>
+                <div class="subtitle">Data Warehouse Initiative Research Sources</div>
+                <div class="company-tagline">Rocky Mountain Insurance Group</div>
+            </div>
+            
+            <!-- <div class="source-categories">
+                <div class="category-card">
+                    <div class="category-title">Academic Sources</div>
+                    <div class="category-count">5</div>
+                    <div class="category-description">Foundational textbooks and scholarly resources</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-title">Industry Publications</div>
+                    <div class="category-count">2</div>
+                    <div class="category-description">Insurance-specific implementation guides</div>
+                </div>
+                <div class="category-card">
+                    <div class="category-title">Technical Resources</div>
+                    <div class="category-count">1</div>
+                    <div class="category-description">Practical implementation methodologies</div>
+                </div>
+            </div>
+            
+            <div class="methodology-section">
+                <div class="methodology-title">Citation Methodology</div>
+                <div class="methodology-text">
+                    All sources are cited according to <strong>Chicago Manual of Style (Turabian)</strong> format, providing comprehensive bibliographic information for academic and professional verification of research foundation.
+                </div>
+            </div> -->
+            
+            <div class="references-section">
+                <!-- <div class="references-title">Bibliography</div> -->
+                
+                <ul class="reference-list">
+                    <li class="reference-item">
+                        <span class="author-name">Ali, Ammar.</span> 2023. "Data Warehousing for Insurance Reporting and Analytics." <em>Astera</em>. September 1, 2023. <a href="https://www.astera.com/type/blog/data-warehousing-for-insurance/" target="_blank">https://www.astera.com/type/blog/data-warehousing-for-insurance/</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        "Insurance Data Warehouse Model - Insurance Analytics Software Architecture." 2020. <em>Insurance Analytics</em>. 2020. <a href="https://insuranceanalytics.graymatter.co.in/insurance-data-warehouse-model" target="_blank">https://insuranceanalytics.graymatter.co.in/insurance-data-warehouse-model</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">Kimball, Ralph, and Margy Ross.</span> <span class="book-title">The Data Warehouse Toolkit: The Definitive Guide to Dimensional Modeling</span>. 3rd ed. John Wiley & Sons, Inc., 2013. <a href="https://learning.oreilly.com/library/view/the-data-warehouse/9781118530801/" target="_blank">https://learning.oreilly.com/library/view/the-data-warehouse/9781118530801/</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">Ponniah, Paulraj.</span> <span class="chapter-title">"The Compelling Need for Data Warehousing."</span> In <span class="book-title">Data Warehousing: Fundamentals for IT Professionals</span>. New York: Wiley, 2010. <a href="https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/07_chapter-01.html#ch001-sec001" target="_blank">https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/07_chapter-01.html#ch001-sec001</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">Ponniah, Paulraj.</span> <span class="chapter-title">"Data Warehouse: the Building Blocks."</span> In <span class="book-title">Data Warehousing: Fundamentals for IT Professionals</span>. New York: Wiley, 2010. <a href="https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/08_chapter-02.html#ch002-sec001" target="_blank">https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/08_chapter-02.html#ch002-sec001</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">Ponniah, Paulraj.</span> <span class="chapter-title">"Infrastructure As The Foundation For Data Warehousing."</span> In <span class="book-title">Data Warehousing: Fundamentals for IT Professionals</span>. New York: Wiley, 2010. <a href="https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/16_chapter-08.html#ch008-sec001" target="_blank">https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/16_chapter-08.html#ch008-sec001</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">Ponniah, Paulraj.</span> <span class="chapter-title">"The Significant Role Of Metadata."</span> In <span class="book-title">Data Warehousing: Fundamentals for IT Professionals</span>. New York: Wiley, 2010. <a href="https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/17_chapter-09.html#ch009-sec002" target="_blank">https://learning.oreilly.com/library/view/data-warehousing-fundamentals/9780470462072/17_chapter-09.html#ch009-sec002</a>.
+                    </li>
+                    
+                    <li class="reference-item">
+                        <span class="author-name">SQLServerCentral.com.</span> 2023. "Building a Kimball Data Warehouse – SQLServerCentral." <em>SQLServerCentral</em>. June 14, 2023. <a href="https://www.sqlservercentral.com/articles/building-a-kimball-data-warehouse" target="_blank">https://www.sqlservercentral.com/articles/building-a-kimball-data-warehouse</a>.
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="citation-note">
+                <div class="citation-note-title">Research Foundation</div>
+                <div class="citation-note-text">
+                    These sources provide the theoretical foundation, practical methodologies, and industry-specific guidance that inform Rocky Mountain Insurance Group's data warehouse architecture, implementation strategy, and projected business outcomes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.getElementById('navMenu');
+                
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            const navbar = document.querySelector('.navbar');
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (!navbar.contains(e.target) && !e.target.closest('a')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
