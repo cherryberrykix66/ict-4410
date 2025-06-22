@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocky Mountain Insurance Group - Strategic Benefits & Call to Action</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #00b894, #00cec9);
+            min-height: 100vh;
+        }
+        
+        /**************************************** start navbar styles */
+        .navbar {
+            background: linear-gradient(135deg, #2d5a27, #4a7c59);
+            padding: 0px 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+            min-height: 80px;
+        }
+        
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: rgba(246, 208, 71, 0.2);
+            border-color: #f6d047;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .nav-link.active {
+            background: #f6d047;
+            color: #102e82;
+            font-weight: 700;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                min-height: 70px;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            .nav-item {
+            margin-top:30px;
+            }
+            .navbar-nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                margin-top: 0px;
+                background: rgba(45, 90, 39, 0.95);
+                padding: 20px;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+            
+            .navbar-nav.active {
+                display: flex;
+            }
+            
+            .nav-link {
+                border-radius: 8px;
+                text-align: center;
+                margin-top: 100px;
+            }
+            
+            .nav-link:hover {
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+            
+            .nav-link {
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+        }
+        /**************************************** end navbar styles */
+        
+        .main-content {
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #00b894;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        .title {
+            color: #00b894;
+            font-size: 42px;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            color: #102e82;
+            margin: 10px 0 0 0;
+            font-style: italic;
+            font-size: 24px;
+        }
+        
+        .company-tagline {
+            color: #00b894;
+            font-size: 20px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .strategic-hero {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 22px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border: 3px solid #ffffff;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .benefit-category {
+            background: linear-gradient(135deg, #fd79a8, #e84393);
+            color: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            border: 3px solid #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-category.operational {
+            background: linear-gradient(135deg, #00b894, #00a085);
+        }
+
+        .benefit-category.customer {
+            background: linear-gradient(135deg, #fdcb6e, #e17055);
+        }
+
+        .benefit-category.future {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+        }
+
+        .benefit-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f6d047;
+        }
+
+        .benefit-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .benefit-item {
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .benefit-highlight {
+            font-weight: bold;
+            color: #f6d047;
+        }
+
+        .transformation-timeline {
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 40px 0;
+            border: 3px solid #ffffff;
+        }
+
+        .timeline-title {
+            color: #f6d047;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .timeline-before-after {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .timeline-before, .timeline-after {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .timeline-before {
+            border-left: 5px solid #ff4757;
+        }
+
+        .timeline-after {
+            border-left: 5px solid #00b894;
+        }
+
+        .timeline-arrow {
+            font-size: 48px;
+            color: #f6d047;
+            text-align: center;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #ff4757, #c44569);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 40px 0;
+            text-align: center;
+            border: 4px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .cta-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-question {
+            font-size: 24px;
+            font-style: italic;
+            margin: 20px 0;
+            color: #f6d047;
+            position: relative;
+            z-index: 1;
+        }
+
+        .investment-box {
+            background: rgba(255,255,255,0.2);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .investment-amount {
+            font-size: 48px;
+            font-weight: 900;
+            color: #f6d047;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .next-steps {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border: 3px solid #ffffff;
+        }
+
+        .steps-title {
+            color: #f6d047;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .step-item {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f6d047;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .step-timeline {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .competitive-warning {
+            background: linear-gradient(135deg, #ff7675, #d63031);
+            color: white;
+            padding: 25px;
+            border-radius: 16px;
+            margin: 30px 0;
+            text-align: center;
+            border: 3px solid #ffffff;
+            animation: pulse 2s infinite;
+        }
+
+        .warning-text {
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .closing-statement {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+            text-align: center;
+            border: 3px solid #ffffff;
+        }
+
+        .closing-text {
+            font-size: 22px;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <svg width="500" height="225" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background circle -->
+                <circle cx="60" cy="60" r="45" fill="#87ceeb" stroke="#ffffff" stroke-width="3"/>
+                
+                <!-- Mountain silhouette -->
+                <g transform="translate(60, 60)">
+                    <!-- Back mountain -->
+                    <path d="M-32 13 L-18 -22 L-4 -13 L9 -27 L23 -18 L32 13 Z" fill="#9966cc" opacity="0.8"/>
+                    <!-- Front mountain -->
+                    <path d="M-27 13 L-13 -18 L0 -9 L13 -22 L27 13 Z" fill="#663399"/>
+                    <!-- Snow caps -->
+                    <path d="M-18 -22 L-13 -18 L-8 -20 L-4 -13" fill="#ffffff" opacity="0.9"/>
+                    <path d="M9 -27 L13 -22 L18 -24 L23 -18" fill="#ffffff" opacity="0.9"/>
+                </g>
+                
+                <!-- RMIG text -->
+                <text x="125" y="45" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white">RMIG</text>
+                <text x="125" y="64" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">ROCKY MOUNTAIN</text>
+                <text x="125" y="80" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#f6d047">INSURANCE GROUP</text>
+                <line x1="125" y1="86" x2="290" y2="86" stroke="#f6d047" stroke-width="1"/>
+                <text x="125" y="100" font-family="Arial, sans-serif" font-size="12" font-style="italic" fill="#f6d047">Protecting Colorado's Future</text>
+            </svg>
+        </div>
+        
+        <!-- Hamburger Menu for Mobile -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+        <ul class="navbar-nav" id="navMenu">
+            <li class="nav-item">
+                <a href="#architecture" class="nav-link">Architecture</a>
+            </li>
+            <li class="nav-item">
+                <a href="#roi" class="nav-link">ROI Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a href="#dataflow" class="nav-link">Data Flow</a>
+            </li>
+            <li class="nav-item">
+                <a href="#metadata" class="nav-link">Metadata</a>
+            </li>
+            <li class="nav-item">
+                <a href="#references" class="nav-link">References</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="header">
+                <div class="title-section">
+                    <div class="title">Strategic Benefits</div>
+                    <div class="subtitle">Competitive Advantage Through Data Excellence</div>
+                    <div class="company-tagline">Transformational Investment Proposal</div>
+                </div>
+            </div>
+
+            <div class="strategic-hero">
+                🚀 This initiative delivers strategic benefits beyond operational efficiency — positioning RMIG for the future of insurance! 🚀
+            </div>
+
+            <div class="transformation-timeline">
+                <div class="timeline-title">Transformation Impact</div>
+                <div class="timeline-before-after">
+                    <div class="timeline-before">
+                        <h4 style="color: #ff4757; margin-top: 0;">BEFORE</h4>
+                        <p><strong>Executive Decisions:</strong> Weeks to process</p>
+                        <p><strong>Risk Assessment:</strong> Fragmented views</p>
+                        <p><strong>Customer Service:</strong> Siloed interactions</p>
+                        <p><strong>Analytics:</strong> Basic reporting only</p>
+                    </div>
+                    <div class="timeline-arrow">➤</div>
+                    <div class="timeline-after">
+                        <h4 style="color: #00b894; margin-top: 0;">AFTER</h4>
+                        <p><strong>Executive Decisions:</strong> Days with real-time analytics</p>
+                        <p><strong>Risk Assessment:</strong> Integrated portfolio views</p>
+                        <p><strong>Customer Service:</strong> 360-degree customer views</p>
+                        <p><strong>Analytics:</strong> AI/ML ready platform</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-category operational">
+                    <div class="benefit-title">🎯 Operational Excellence</div>
+                    <div class="benefit-items">
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Decision Cycles:</span> Reduce executive decision cycles from weeks to days through real-time analytics
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Risk Management:</span> Integrated portfolio views for better capital allocation and strategic planning
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Underwriting:</span> Comprehensive risk assessment tools that improve pricing accuracy and profitability
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefit-category customer">
+                    <div class="benefit-title">🤝 Customer Experience</div>
+                    <div class="benefit-items">
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">360-Degree Views:</span> Complete customer visibility across all touchpoints and interaction history
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Personalization:</span> Deliver personalized policy recommendations based on comprehensive data analysis
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Claims Processing:</span> Faster claims resolution through automated decision support systems
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="benefit-category future">
+                    <div class="benefit-title">🤖 Future-Ready Platform</div>
+                    <div class="benefit-items">
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">AI Foundation:</span> Clean, integrated data foundation becomes the launchpad for AI/ML initiatives
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Predictive Analytics:</span> Advanced capabilities for forecasting trends and identifying opportunities
+                        </div>
+                        <div class="benefit-item">
+                            <span class="benefit-highlight">Automation:</span> Automated underwriting and advanced fraud detection capabilities
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="competitive-warning">
+                <div class="warning-text">
+                    ⚠️ The insurance industry is rapidly evolving toward data-driven operations. Companies investing in comprehensive analytical capabilities NOW will have significant competitive advantages in underwriting accuracy, customer service, and operational efficiency. ⚠️
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <div class="cta-title">Critical Investment Decision</div>
+                <div class="cta-question">
+                    The question isn't whether we can afford to build this data warehouse.<br>
+                    The question is whether we can afford NOT to.
+                </div>
+                <div class="investment-box">
+                    <div style="font-size: 24px; margin-bottom: 10px;">Requesting Budget Approval</div>
+                    <div class="investment-amount">$2.8M</div>
+                    <div style="font-size: 18px; margin-top: 10px;">Strategic Investment in Our Future</div>
+                </div>
+                <div style="font-size: 20px; font-weight: bold; position: relative; z-index: 1;">
+                    Our competitors are making similar investments.<br>
+                    We cannot fall behind in this critical capability.
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <div class="steps-title">Implementation Timeline</div>
+                <div class="steps-grid">
+                    <div class="step-item">
+                        <span class="step-number">1</span>
+                        <div class="step-timeline">30 Days</div>
+                        <div>Vendor Selection & Contract Negotiation</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <span class="step-number">2</span>
+                        <div class="step-timeline">45 Days</div>
+                        <div>Project Team Formation & Resource Allocation</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <span class="step-number">3</span>
+                        <div class="step-timeline">60 Days</div>
+                        <div>Phase One Implementation Launch</div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <span class="step-number">4</span>
+                        <div class="step-timeline">12 Months</div>
+                        <div>Full Platform Deployment & ROI Realization</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="closing-statement">
+                <div class="closing-text">
+                    This investment will <strong>transform Rocky Mountain Insurance Group's analytical capabilities</strong> and deliver substantial returns while positioning us for continued success in an increasingly competitive market.
+                    <br><br>
+                    <strong>Thank you for your consideration. I'm ready to answer any questions.</strong>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(135deg, #f6d047, #e6c547); border-radius: 16px; border: 3px solid #102e82;">
+                <h3 style="color: #102e82; font-size: 28px; margin-bottom: 15px;">Ready to Transform RMIG?</h3>
+                <p style="font-size: 20px; color: #2d3436; font-weight: bold; line-height: 1.4;">
+                    🎯 Approve $2.8M Investment Today<br>
+                    📈 Realize $4.2M Annual Benefits<br>
+                    🚀 Lead the Industry in Data Excellence
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+        
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.getElementById('navMenu');
+                
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            const navbar = document.querySelector('.navbar');
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (!navbar.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
