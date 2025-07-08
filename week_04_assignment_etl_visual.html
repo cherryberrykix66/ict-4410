@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETL Transformation Visuals</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .visual-section {
+            padding: 40px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .visual-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        /* ETL Flow Diagram */
+        .etl-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .etl-box {
+            flex: 1;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .etl-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .etl-box h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .arrow {
+            font-size: 2em;
+            color: #74b9ff;
+            font-weight: bold;
+        }
+        
+        /* Data Source Comparison */
+        .data-sources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .source-box {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .source-box h3 {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            margin: -25px -25px 20px -25px;
+            padding: 15px 25px;
+            border-radius: 10px 10px 0 0;
+            font-size: 1.3em;
+        }
+        
+        .field-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 4px solid #74b9ff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .field-name {
+            font-weight: bold;
+            color: #2d3436;
+        }
+        
+        .field-details {
+            color: #636e72;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        /* Transformation Process */
+        .transformation-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .transform-step {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #e17055;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .step-content {
+            margin-left: 40px;
+        }
+        
+        .step-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        /* Data Quality Checks */
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .quality-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .quality-check {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .quality-check:hover {
+            transform: scale(1.05);
+        }
+        
+        .quality-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px auto;
+            fill: currentColor;
+        }
+        
+        /* Unified Schema */
+        .unified-schema {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .schema-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .schema-fields {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .schema-fields {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .schema-fields {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, 1fr);
+            }
+        }
+        
+        .schema-field {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .responsive-note {
+            background: #74b9ff;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ETL Transformation Process</h1>
+            <p>Telecommunications Subscriber Data Integration</p>
+        </div>
+        
+        <!-- SVG Icons Definition -->
+        <svg style="display: none;">
+            <defs>
+                <!-- Extract Icon -->
+                <g id="extract-icon">
+                    <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6 8h12M6 12h12M6 16h8" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Transform Icon -->
+                <g id="transform-icon">
+                    <path d="M14 2l6 6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 12h8" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 8v8" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="10" cy="10" r="1" fill="currentColor"/>
+                    <circle cx="14" cy="14" r="1" fill="currentColor"/>
+                    <path d="M9 15l6-6" stroke="currentColor" stroke-width="1.5"/>
+                </g>
+                
+                <!-- Load Icon -->
+                <g id="load-icon">
+                    <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M9 9h6v6H9z" fill="currentColor"/>
+                    <path d="M7 7h2v2H7zM15 7h2v2h-2zM7 15h2v2H7zM15 15h2v2h-2z" fill="currentColor"/>
+                </g>
+                
+                <!-- Payment System Icon -->
+                <g id="payment-icon">
+                    <rect x="2" y="4" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6 8h4M6 12h6" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="18" cy="11" r="2" fill="currentColor"/>
+                </g>
+                
+                <!-- Sign-up Icon -->
+                <g id="signup-icon">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="2"/>
+                    <line x1="8" y1="17" x2="16" y2="17" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Magnifying Glass Icon -->
+                <g id="magnify-icon">
+                    <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Checkmark Icon -->
+                <g id="check-icon">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <polyline points="9,12 12,15 15,9" fill="none" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Clipboard Icon -->
+                <g id="clipboard-icon">
+                    <rect x="8" y="2" width="8" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M6 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8 10h8M8 14h8M8 18h5" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Bar Chart Icon -->
+                <g id="chart-icon">
+                    <line x1="12" y1="20" x2="12" y2="10" stroke="currentColor" stroke-width="2"/>
+                    <line x1="18" y1="20" x2="18" y2="4" stroke="currentColor" stroke-width="2"/>
+                    <line x1="6" y1="20" x2="6" y2="16" stroke="currentColor" stroke-width="2"/>
+                </g>
+                
+                <!-- Target Icon -->
+                <g id="target-icon">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                </g>
+            </defs>
+        </svg>
+        
+        <!-- ETL Process Flow -->
+        <div class="visual-section">
+            <div class="section-title">ETL Process Flow</div>
+            <div class="etl-flow">
+                <div class="etl-box">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#extract-icon"/>
+                    </svg>
+                    <h3>EXTRACT</h3>
+                    <p>Pull data from Payment System & Sign-up System</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="etl-box">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#transform-icon"/>
+                    </svg>
+                    <h3>TRANSFORM</h3>
+                    <p>Standardize IDs, Map Account Types, Validate Data</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="etl-box">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#load-icon"/>
+                    </svg>
+                    <h3>LOAD</h3>
+                    <p>Insert unified data into Data Warehouse</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Source Systems Comparison -->
+        <div class="visual-section">
+            <div class="section-title">Source Systems Data Structure</div>
+            <div class="data-sources">
+                <div class="source-box">
+                    <h3>
+                        <svg style="width: 20px; height: 20px; display: inline-block; margin-right: 8px; fill: currentColor;" viewBox="0 0 24 24">
+                            <use href="#payment-icon"/>
+                        </svg>
+                        Payment System
+                    </h3>
+                    <div class="field-item">
+                        <div class="field-name">Subscriber_Id</div>
+                        <div class="field-details">STRING (36) - UUID format<br>
+                        Example: 12345678-1234-1234-1234-123456789abc</div>
+                    </div>
+                    <div class="field-item">
+                        <div class="field-name">Subscriber Account Type</div>
+                        <div class="field-details">STRING (7) - Coded format<br>
+                        PRP-INV, PRP-BUS, PSP-INV, PSP-BUS</div>
+                    </div>
+                </div>
+                
+                <div class="source-box">
+                    <h3>
+                        <svg style="width: 20px; height: 20px; display: inline-block; margin-right: 8px; fill: currentColor;" viewBox="0 0 24 24">
+                            <use href="#signup-icon"/>
+                        </svg>
+                        Sign-up System
+                    </h3>
+                    <div class="field-item">
+                        <div class="field-name">Subscriber_Id</div>
+                        <div class="field-details">STRING (32) - Hex format<br>
+                        Example: 1234567812341234123456789abc</div>
+                    </div>
+                    <div class="field-item">
+                        <div class="field-name">Payment Model</div>
+                        <div class="field-details">STRING (15)<br>
+                        Pre-Paid, Post-Paid</div>
+                    </div>
+                    <div class="field-item">
+                        <div class="field-name">Account Type</div>
+                        <div class="field-details">STRING (30)<br>
+                        Individual, Business</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Transformation Steps -->
+        <div class="visual-section">
+            <div class="section-title">Transformation Process</div>
+            <div class="transformation-steps">
+                <div class="transform-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">ID Standardization</div>
+                        <div>Remove hyphens from Payment System UUIDs to match Sign-up System format (32 chars)</div>
+                    </div>
+                </div>
+                
+                <div class="transform-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Account Type Mapping</div>
+                        <div>Decode Payment System codes: PRP→Pre-Paid, PSP→Post-Paid, INV→Individual, BUS→Business</div>
+                    </div>
+                </div>
+                
+                <div class="transform-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Data Validation</div>
+                        <div>Validate business rules, check for duplicates, ensure referential integrity</div>
+                    </div>
+                </div>
+                
+                <div class="transform-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Master Record Creation</div>
+                        <div>Merge data from both systems into unified subscriber master record</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Data Quality Checks -->
+        <div class="visual-section">
+            <div class="section-title">Data Quality Validation</div>
+            <div class="quality-grid">
+                <div class="quality-check">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#magnify-icon"/>
+                    </svg>
+                    <h4>Duplicate Detection</h4>
+                    <p>Identify same subscribers across different ID formats</p>
+                </div>
+                <div class="quality-check">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#check-icon"/>
+                    </svg>
+                    <h4>Referential Integrity</h4>
+                    <p>Ensure subscriber records exist in both systems</p>
+                </div>
+                <div class="quality-check">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#clipboard-icon"/>
+                    </svg>
+                    <h4>Business Rules</h4>
+                    <p>Validate account type combinations make business sense</p>
+                </div>
+                <div class="quality-check">
+                    <svg class="quality-icon" viewBox="0 0 24 24">
+                        <use href="#chart-icon"/>
+                    </svg>
+                    <h4>Completeness</h4>
+                    <p>Check all required fields are populated</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Unified Schema -->
+        <div class="visual-section">
+            <div class="unified-schema">
+                <div class="schema-title">
+                    <svg style="width: 30px; height: 30px; display: inline-block; margin-right: 10px; fill: currentColor;" viewBox="0 0 24 24">
+                        <use href="#target-icon"/>
+                    </svg>
+                    Unified Data Warehouse Schema
+                </div>
+                <div class="schema-fields">
+                    <div class="schema-field">
+                        <strong>Master_Subscriber_Id</strong><br>
+                        STRING (32) - Standardized format
+                    </div>
+                    <div class="schema-field">
+                        <strong>Payment_Model</strong><br>
+                        STRING (15) - Pre-Paid/Post-Paid
+                    </div>
+                    <div class="schema-field">
+                        <strong>Account_Type</strong><br>
+                        STRING (30) - Individual/Business
+                    </div>
+                    <div class="schema-field">
+                        <strong>Source_System</strong><br>
+                        STRING (20) - Data lineage tracking
+                    </div>
+                    <div class="schema-field">
+                        <strong>Last_Updated</strong><br>
+                        TIMESTAMP - Change tracking
+                    </div>
+                    <div class="schema-field">
+                        <strong>Data_Quality_Score</strong><br>
+                        INTEGER - Quality metrics
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="responsive-note">
+            <svg style="width: 20px; height: 20px; display: inline-block; margin-right: 8px; fill: currentColor;" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 16v-4M12 8h.01" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            This ETL process ensures a single source of truth for subscriber data while maintaining data quality and business rule compliance.
+        </div>
+    </div>
+</body>
+</html>
